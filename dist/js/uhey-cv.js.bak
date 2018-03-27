@@ -1,0 +1,184 @@
+$(function() {
+
+	function init(obj) {
+		var data = function() {
+			var o = {
+				initIndex: obj && obj.initIndex || 0,
+				id: obj && obj.id || "cv",
+				len: document.getElementById(arguments[0].id || "cv").children.length - 1,
+				eName: /firefox/.test(navigator.userAgent.toLowerCase()) ? "DOMMouseScroll" : "mousewheel"
+			}
+			o.li = $("#" + o.id).children()
+			return o;
+		}(obj);
+
+		var flag, index = data.initIndex;
+		data.li.each(function(i, ele) {
+			$(this).index() != data.initIndex && $(this).css({
+				display: "none"
+			});
+		})
+
+		$("body").bind(data.eName, function(e) {
+			if(flag) return;
+			flag = !0;
+			var delta = e.originalEvent.wheelDelta > 0 ? -1 : 1; // -1 向上滑 ；1 向下滑
+			index = index + delta < 0 ? data.len : index + delta > data.len ? 0 : index + delta;
+			data.li.addClass("out-up").removeClass("in-down");
+			data.li.eq(index).removeClass("out-up").addClass("in-down").css("display", "block")
+			$(this).on('animationend', function(e) {
+				flag = !1
+			});
+
+		})
+	}
+init({
+		initIndex: 0,
+		id: "cv"
+	});
+})
+
+$class("eh.wx.health.payment.QueueSearch", {
+    extend:"eh.wx.health.search.Condition",
+    title: "抽血取号",
+    filterNoCert:!1,
+    config:{
+        organ_1000899 : {    //上海六院
+            filterNoCert:!0 //过滤无证件就诊人
+        }
+    },
+    afterInitComponent: function () {
+        var me = this, el = me.el;
+        me.popovers = {};
+        me.callParent();
+        el.on("click", "#joinQueueSubmit", function () {
+            var scope = el.scope();
+            if (scope.business.status) {
+                me.getPutDrawBloodQueue();
+            }
+        }).on("click","#checkQueueInfo",function () {
+            var scope = el.scope();
+            if (scope.business.status) {
+                me.getGetDrawBloodQueue();
+            }
+        })
+
+        me.setupService([{
+            beanName: "eh.drawBloodQueueService",
+            method: ["putDrawBloodQueue","getDrawBloodQueue"]
+        }]);
+    },
+
+    initScope: function () {
+        var me = this,
+            initData = {
+                business: {
+                    source: "payment", // 业务类型
+                    sourceLink: 'queue', // 链路
+                    healthCardItems: [], // 就诊卡列表
+                    busType: 11, // 就诊人查询类型
+                    status: false,//提交按钮激活状态
+                    organCfgServiceName:'queryEnableManualCardFlag', // 获取缴费业务机构配置接口名称
+                    searchHspListType:3, // 机构列表业务类型
+                    submit:[{key:'joinQueueSubmit',text:'取号'},{key:'checkQueueInfo',text:'查看队列'}]
+                }
+            }
+        me.initScopeData(initData);
+    },
+
+    organCfgProcesses: function () {
+        var me = this, scope = me.el.scope();
+        me.getOrganSwitch('getConfiguration','bloodQueueRemark').then(function (val) {$scope.business.submitTips = val || ""});
+        scope.userHspCfg.organHealthCardSupport ? me.initHealthCard() : (scope.business.status = me.btnStatusProcesses());
+    },
+
+    getPutDrawBloodQueue:function () {
+        var me=this,scope = me.el.scope(),queueData;
+        queueData = {
+            action:'PUTLISQUE',
+            bussType:"0",
+            patientName:scope.userInfo.patientName,
+            idCard:scope.userInfo.idcard+"",
+            mobile:scope.userInfo.mobile,
+            organId:scope.userHsp.organId+"",
+            patientId:scope.userHealthCard.cardId+""
+        }
+        $sys.showLoading();
+        me.service.putDrawBloodQueue(queueData).then(function (data) {
+            $sys.hideLoading();
+            data.code == 200 ?(
+                $sys.showMsg({
+                    title: "取号成功",
+                    cssClass: "popInput",
+                    template: "<p>您已取号成功，排第<span class='orange'>"+data.lisQueryResponse.orderNum+"</span>位，前面还有<span class='orange'>"+data.lisQueryResponse.remainNum+"</span>位。您可通过抽血队列查看排队情况</p>",
+                    buttons:  [
+                        {
+                            text: "取消",
+                            type:"button-default"
+                        },
+                        {
+                            text: "进入队列",
+                            type:"button-positive",
+                            onTap: function(e) {
+                                me.getGetDrawBloodQueue();
+                            }
+                        }
+                    ]
+                })) : ($sys.showMsg({
+                title: "取号失败",
+                template: "<p>"+data.msg+"</p>",
+                cssClass: "popInput",
+                buttons:  [
+                    {
+                        text: "确定",
+                        type:"button-positive"
+                    }
+                ]
+            }));
+        }).fail(function (e) {
+            $sys.hideLoading();
+            $sys.showFail(e);
+        });
+    },
+    getGetDrawBloodQueue:function (queueData) {
+        var me=this,scope = me.el.scope(),queueData;
+        queueData = {
+            action:'GETLISPD',
+            bussType:"0",
+            patientName:scope.userInfo.patientName,
+            idCard:scope.userInfo.idcard+"",
+            mobile:scope.userInfo.mobile,
+            organId:scope.userHsp.organId+"",
+            patientId:scope.userHealthCard.cardId+""
+        }
+        $sys.showLoading();
+        me.service.getDrawBloodQueue(queueData).then(function (data) {
+            $sys.hideLoading();
+            data.code==200 ? ($sys.openModule({
+                url: "eh.wx.health.payment.phlebotomizeQueue",
+                cache: me.popovers,
+                title: "抽血队列",
+            }).then(function (popover) {
+                popover.module.initScope(queueData,data);
+            })) : ($sys.showMsg({
+                title: "提示",
+                template: "<p>"+data.msg+"</p>",
+                cssClass: "popInput",
+                buttons:  [
+                    {
+                        text: "确定",
+                        type:"button-positive"
+                    }
+                ]
+            }));
+        }).fail(function (e) {
+            $sys.hideLoading();
+            $sys.showFail(e);
+        });
+    },
+    
+    btnStatusProcesses: function () { // 判断查找按钮可否激活
+        var me = this, scope = me.el.scope();
+        return !!scope.userInfo.mpiId && !!scope.userHsp.organId && !!( !scope.userHspCfg.organHealthCardSupport || scope.userHealthCard.cardId );
+    },
+});
