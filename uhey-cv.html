@@ -1,10 +1,259 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
-		<meta charset="UTF-8">
-		<title>uhey's cv</title>
+		<meta charset="UTF-8" class="cv-module">
+		<title>uhey-cv</title>
+		<link rel="stylesheet" type="text/css" href="css/uhey-cv.css" />
 	</head>
+
 	<body>
-		test
+		<div class="container">
+			<ul id="cv">
+				<!--封面-->
+				<!--<li id="index" class="cv-module in-down">
+					<span>WelCome</span>
+					<div class="index">
+						<div class="index-u1"></div>
+						<div class="index-u2"></div>
+						<div class="index-u3">uheyの</div>
+					</div>
+				</li>-->
+				<!--介绍-->
+				<li id="introduction" class="cv-module in-down">
+					<span>introduction</span>
+					<div class="introduce">
+						<div class="introduce-photo">
+							<img src="img/avatar.jpg" />
+						</div>
+						<div class="introduce-brief">
+							<h5><span>uhey</span><span>22岁</span><span>女</span></h5>
+							<p class="introduce-brief-more">
+								<span><b>籍贯</b>湖北黄石</span>
+								<span><b>现居</b>杭州滨江</span>
+								<span><b>学历</b>本科在读</span>
+								<span><b>工作年限</b>3年以上</span>
+							</p>
+						</div>
+					</div>
+					<div class="introduce introduce-gam">
+						<a title="联系电话">
+							<i class="icon icon-tel"></i>
+						</a>
+						<a title="联系邮箱">
+							<i class="icon icon-mail"></i>
+						</a>
+						<a title="博客小站">
+							<i class="icon icon-blog"></i>
+						</a>
+						<a title="github社交">
+							<i class="icon icon-git"></i>
+						</a>
+						<a title="知乎社交">
+							<i class="icon icon-zhihu"></i>
+						</a>
+						<a title="联系QQ">
+							<i class="icon icon-qq"></i>
+						</a>
+					</div>
+				</li>
+				<!--技能-->
+				<li id="skills" class="cv-module in-down">
+					<span>skills</span>
+					<div class="skills">
+						<div>
+							<span class="skills-name"> HTML4 / HTML5 </span>
+							<div class="skill-brief">
+								<p>熟练度：<span>★★★★☆</span></p>
+							</div>
+							<div class="skill-brief-tip">
+								熟练使用HTML4语义化标签，熟悉HTML5新标签特性，能够自如运用，编写出合理优质的dom结构
+							</div>
+						</div>
+						<div>
+							<span class="skills-name"> CSS2 / CSS3 / SASS</span>
+							<div class="skill-brief">
+								<p>熟练度：<span>★★★★☆</span></p>
+							</div>
+							<div class="skill-brief-tip">
+								熟悉各浏览器、模式、BFC、layout、等hack技巧。 精通多端响应、自适应、各种布局。 有独立使用sass编写css框架经验。
+							</div>
+						</div>
+						<div>
+							<span class="skills-name"> JAVASCRIPT(ES5)</span>
+							<div class="skill-brief">
+								<p>熟练度：<span>★★★☆☆</span></p>
+							</div>
+							<div class="skill-brief-tip">
+								能独立完成常用组件封装。 了解常用代码设计模式。 有1年业务代码编写经验。
+							</div>
+						</div>
+						<div>
+							<span class="skills-name"> JQUERY(1.10.-)</span>
+							<div class="skill-brief">
+								<p>熟练度：<span>★★★☆☆</span></p>
+							</div>
+							<div class="skill-brief-tip sm">
+								熟悉1.6~1.10版本。熟练使用jquery操作dom。熟读源码计划进行中。
+							</div>
+						</div>
+						<div>
+							<span class="skills-name"> BOOTSTRAP(3.2.0)</span>
+							<div class="skill-brief">
+								<p>熟练度：<span>★★★★☆</span></p>
+							</div>
+							<div class="skill-brief-tip sm">
+								熟悉2.0~3.2版本。熟读该框架sass源码(有日志记载)。js源码解读进行中。
+							</div>
+						</div>
+						<div>
+							<span class="skills-name"> ANGULAR(2)</span>
+							<div class="skill-brief">
+								<p>熟练度：<span>★★★☆☆</span></p>
+							</div>
+							<div class="skill-brief-tip sm">
+								熟悉2.0版本。熟悉各指令用法、熟悉$scope、$watch、等各指令运行机制。
+							</div>
+						</div>
+						<div>
+							<span class="skills-name"> PHP / JAVA / SQL</span>
+							<div class="skill-brief">
+								<p>熟练度：<span>★★☆☆☆</span></p>
+							</div>
+							<div class="skill-brief-tip xs">
+								了解该后端语言基础语法。能编写简单的功能代码。熟练操作常用后端工具。
+							</div>
+						</div>
+						<div>
+							<span class="skills-name"> PHOTOSHOP</span>
+							<div class="skill-brief">
+								<p>熟练度：<span>★★★★☆</span></p>
+							</div>
+							<div class="skill-brief-tip xs">
+								熟练运用菜单工具操作图层，能独立制作icon小图标，有良好审美意识，0像素容忍。
+							</div>
+						</div>
+
+						<div>
+							<span class="skills-name"> MORE +</span>
+							<div class="skill-brief">
+								<p>more：<span>)</span></p>
+							</div>
+						</div>
+						<div class="patch"></div>
+					</div>
+				</li>
+				<!--职业-->
+				<li id="career" class="cv-module in-down">
+					<span>Jobs</span>
+					<ul class="career">
+						<li class="career-panel">
+							<span>2016 - 11 至 至今</span>
+							</span>
+							<div class="career-brief">
+								<h4>纳里健康科技</h4><small><b>中级前端工程师</b>杭州</small>
+								<ol>
+									<div class="career-project-brief" name="ngari">
+										<a class="career-brief-careerLinks" alt="纳里健康" title="云医疗服务平台">
+											<img src="img/ngarihealth.png" />
+										</a>
+										<p>
+											<a target="_blank" href="http://www.ngarihealth.com/">访问官网 &raquo;</a>
+										</p>
+									</div>
+									<li>参与需求评审，提出意见和建议，使用禅道维护日常工作任务；</li>
+									<li>参与新的业务代码开发，使用angular，ionic，ES5编写业务代码；</li>
+									<li>优化或维护或重构老旧的业务代码，翻新流程文档。</li>
+									<li>使用angular编写与业务无关的JS组件用于项目开发；</li>
+									<li>设计css编写规范并推行，独立编写项目css框架；</li>
+									<li>使用gitlab提交日常工作内容。</li>
+									<div class="career-brief-bg"></div>
+								</ol>
+							</div>
+						</li>
+						<li class="career-panel">
+							<span>2014 - 07 至 2016 - 08</span>
+							</span>
+							<div class="career-brief">
+								<h4>长江教育研究院</h4><small><b>web前端工程师</b>武汉</small>
+
+								<ol>
+									<div class="career-project-brief" name="dodo">
+										<a class="career-brief-careerLinks" alt="多多社区" title="多多社区，在线K12教育平台">
+											<img src="img/dodo.png" />
+										</a>
+										<p>
+											<a target="_blank" href="http://www.dodoedu.com">访问官网 &raquo;</a>
+										</p>
+									</div>
+									<li>解读需求，并根据需求使用photoshop完成网页设计图；</li>
+									<li>根据设计稿还原静态网页，保证0像素误差，兼容性要求IE6+；</li>
+									<li>独立完成简单的JS动态效果，参与JS框架组件定制；</li>
+									<li>参与项目css框架构思；</li>
+									<li>使用svn提交日常工作内容。</li>
+									<div class="career-brief-bg"></div>
+								</ol>
+
+							</div>
+						</li>
+					</ul>
+				</li>
+				<!--教育-->
+				<li id="education" class="cv-module in-down">
+					<span>education</span>
+
+					<div class="edu">
+						<div class="edu-list">
+							<div class="edu-header">
+								<strong><i class="icon icon-school"></i>2016 - 03 ~ 2018 - 06 本科</strong>
+								<h4>湖北大学  <small>【计算机科学与技术】</small></h4>
+							</div>
+							<div class="edu-life">
+								<span class="edu-life-default">空缺待补</span>
+							</div>
+						</div>
+
+						<div class="edu-list">
+							<div class="edu-header">
+								<strong><i class="icon icon-school"></i>2012 - 09 ~ 2015 - 06 专科</strong>
+								<h4>长江工程职业技术学院   <small>【软件技术】 </small></h4>
+							</div>
+							<ul class="edu-life">
+								<li>
+									<span class="edu-life-label">【学习】</span> c#,.net,java,sql,oracle,js,ps等;
+								</li>
+								<li>
+									 <span class="edu-life-label">【项目】</span>暂不公开
+								</li>
+								<li>
+									<span class="edu-life-label">【成就】</span> c#院系比赛 优秀奖(项目名称：miniQQ),校园设计大赛 冠军;
+								</li>
+								<li>
+									<span class="edu-life-label">【实习】 </span>2014年7月于
+									<a href="http://www.dodoedu.com" target="_blank">长江教育研究院</a>实习报到 ,同年10月被批予转正。
+								</li>
+							</ul>
+
+						</div>
+
+					</div>
+
+				</li>
+				<!--其它--
+				<li id="other" class="cv-module">
+					其它
+				</li>-->
+				<!--期望-->
+				<li id="expectations" class="cv-module in-down">
+					<div class="expe">
+						对自己的期望
+					</div>
+				</li>
+			</ul>
+		</div>
 	</body>
+	<script src="js/jquery.js"></script>
+	<script src="js/uhey-font.js"></script>
+	<script src="js/uhey-cv.js"></script>
+
 </html>
